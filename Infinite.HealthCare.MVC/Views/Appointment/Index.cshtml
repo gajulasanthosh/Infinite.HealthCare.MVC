@@ -1,0 +1,44 @@
+﻿@model IEnumerable<AppointmentVM>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>List of Appointments</h1>
+
+<div class="col">
+    <a asp-controller="Appointment" asp-action="Create" class="btn btn-primary">Book a new Appointment</a>
+</div>
+<div class="col-md-11">
+    <table class="tatble table-hover table-bordered text-center">
+        <thead>
+            <tr>
+                <th>Appointment Id</th>
+                <th>Patient Id</th>
+                <th>Doctor Id</th>
+                <th>Appointment Date</th>
+                <th>Appointment Time</th>
+                <th>Problem</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var x in Model)
+            {
+                <tr>
+
+                    <td>@x.Id</td>
+                    <td>@x.PatientId</td>
+                    <td>@x.DoctorId</td>
+                    <td>@x.AppointmentDate.ToShortDateString()</td>
+                    <td>@x.AppointmentTime.ToShortTimeString()</td>
+                    <td>@x.Problem</td>
+                    
+                    <td>
+                        <a asp-controller="Appointment" asp-action="Delete" asp-route-id="@x.Id" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

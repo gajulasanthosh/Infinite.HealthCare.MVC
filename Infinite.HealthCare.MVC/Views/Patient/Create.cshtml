@@ -1,0 +1,80 @@
+﻿@model PatientVM
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="col offset-4 pt-5 ">
+    <h1>Add details of Patient</h1>
+    <form asp-controller="Patient" asp-action="Create" method="post">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="mb-1">
+                    <label asp-for="FullName" class="form-label"></label>
+                    <input type="text" asp-for="FullName" class="form-control" />
+                    <span asp-validation-for="FullName"></span>
+                </div>
+                <div class="mb-2">
+                    <label asp-for="Gender" class="form-label"></label>
+                    <div>
+                        <label><input type="radio" asp-for="Gender" value="Male" /> Male</label>
+                        <label><input type="radio" asp-for="Gender" value="Female" /> Female</label>
+                        <label><input type="radio" asp-for="Gender" value="Other" /> Other</label>
+                    </div>
+                    <span asp-validation-for="Gender"></span>
+                </div>
+
+                <div class="mb-2">
+                    <label asp-for="Age" class="form-label"></label>
+                    <input type="text" asp-for="Age" class="form-control" />
+                    <span asp-validation-for="Age"></span>
+                </div>
+
+                <div class="mb-2">
+                    <label asp-for="EmailId" class="form-label"></label>
+                    <input type="text" asp-for="EmailId" class="form-control" />
+                    <span asp-validation-for="EmailId"></span>
+                </div>
+
+                @*<div class="mb-2">
+                    <label asp-for="Password" class="form-label"></label>
+                    <input type="password" asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password"></span>
+                </div>*@
+                <div class="mb-2">
+                    <label asp-for="Address" class="form-label"></label>
+                    <input type="text" asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address"></span>
+                </div>
+                <div class="mb-2">
+                    <label asp-for="City" class="form-label"></label>
+                    <input type="text" asp-for="City" class="form-control" />
+                    <span asp-validation-for="City"></span>
+                </div>
+
+                <div class="mb-2">
+                    <label asp-for="State" class="form-label"></label>
+                    <input type="text" asp-for="State" class="form-control" />
+                    <span asp-validation-for="State"></span>
+                </div>
+
+                <div class="mb-2">
+                    <label asp-for="PinCode" class="form-label"></label>
+                    <input type="text" asp-for="PinCode" class="form-control" />
+                    <span asp-validation-for="PinCode"></span>
+                </div>
+
+                <div class="mb-2">
+                    <label asp-for="MobileNo" class="form-label"></label>
+                    <input type="text" asp-for="MobileNo" class="form-control" />
+                    <span asp-validation-for="MobileNo"></span>
+                </div>
+
+                <div class="mt-2 d-grid">
+                    <input type="submit" class="btn btn-primary" value="Add New" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+

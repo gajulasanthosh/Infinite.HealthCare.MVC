@@ -1,0 +1,35 @@
+﻿@model AppointmentVM
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<body>
+    <div class="container offset-4 pt-5">
+        <h1>Delete Appointment</h1>
+
+        <div class="row">
+            <div class="col-md-5">
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <ul class="list-group">
+                    <li class="list-group-item"><b>PatientId: </b>@Model.PatientId</li>
+                    <li class="list-group-item"><b>DoctorId: </b>@Model.DoctorId</li>
+                    <li class="list-group-item"><b>Appointment Date: </b>@Model.AppointmentDate</li>
+                    <li class="list-group-item"><b>Appointment Time: </b>@Model.AppointmentTime</li>
+                    <li class="list-group-item"><b>Problem: </b>@Model.Problem</li>
+
+                </ul>
+                <div>
+                    Are you sure do you want to delete this Appointment?
+                </div>
+                <div>
+                    <form asp-controller="Appointment" asp-action="Delete" method="post">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <a asp-controller="Appointment" asp-action="Index" Back to List></a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+

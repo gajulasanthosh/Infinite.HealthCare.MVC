@@ -1,0 +1,47 @@
+﻿@model AppointmentVM
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="col offset-4 pt-5 ">
+    <h1>Book an Appointment</h1>
+    <form asp-controller="Appointment" asp-action="Create" method="post">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="mb-1">
+                    <label asp-for="DoctorId" class="form-label"></label>
+                    <input type="text" asp-for="DoctorId" class="form-control" />
+                    <span asp-validation-for="DoctorId"></span>
+                </div>
+
+                <div class="mb-2">
+                    <label asp-for="PatientId" class="form-label"></label>
+                    <input type="text" asp-for="PatientId" class="form-control" />
+                    <span asp-validation-for="PatientId"></span>
+                </div>
+
+                <div class="mb-2">
+                    <label asp-for="AppointmentDate" class="form-label"></label>
+                    <input type="date" asp-for="AppointmentDate" class="form-control" />
+                    <span asp-validation-for="AppointmentDate"></span>
+                </div>
+
+                <div class="mb-2">
+                    <label asp-for="AppointmentTime" class="form-label"></label>
+                    <input type="time" asp-for="AppointmentTime" class="form-control" />
+                    <span asp-validation-for="AppointmentTime"></span>
+                </div>
+                <div class="mb-2">
+                    <label asp-for="Problem" class="form-label"></label>
+                    <input type="text" asp-for="Problem" class="form-control" />
+                    <span asp-validation-for="Problem"></span>
+                </div>
+
+                <div class="mt-2 d-grid">
+                    <input type="submit" class="btn btn-primary" value="Add New" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
