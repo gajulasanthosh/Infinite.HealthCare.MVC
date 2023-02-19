@@ -16,10 +16,7 @@ namespace Infinite.HealthCare.MVC.Models
         [Required(ErrorMessage ="Please enter Email Id")]
         [EmailAddress(ErrorMessage ="Please enter valid Email Address")]
         public string EmailId { get; set; }
-        [Required(ErrorMessage = "Please enter a password")]
-        [StringLength(30, MinimumLength = 6, ErrorMessage = "Password should be atleast 6 characters")]
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
+        
         [Required(ErrorMessage ="Please enter Qualification")]
         public string Qualification { get; set; }
         [Required(ErrorMessage ="Please select Specialization")]
@@ -34,5 +31,6 @@ namespace Infinite.HealthCare.MVC.Models
         [Phone]
         [StringLength(10, MinimumLength = 10, ErrorMessage = "Please enter valid Mobile Number")]
         public string PhoneNo { get; set; }
+        //public int? UserId { get; set; }
     }
 }

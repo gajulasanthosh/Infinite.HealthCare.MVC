@@ -22,7 +22,7 @@ namespace Infinite.HealthCare.MVC.Models
         [Display(Name ="Appointment Time")]
         public DateTime AppointmentTime { get; set; }
         [Required(ErrorMessage ="Please explain the problem")]
-        //[StringLength(150)]
+        [StringLength(150)]
         public string Problem { get; set; }
     }
 }

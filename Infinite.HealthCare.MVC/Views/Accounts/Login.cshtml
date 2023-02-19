@@ -1,0 +1,48 @@
+﻿@model LoginVM
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<body class="image text-white">
+    <form asp-controller="Accounts" asp-action="Login" method="post">
+        <div class="row">
+            <div class="col-md-4">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="mb-3">
+                    <label asp-for="UserName" class="form-label"></label>
+                    <input type="text" asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Password" class="form-label"></label>
+                    <input type="password" asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password"></span>
+                </div>
+
+                <div class="mt-3 d-grid">
+                    <input type="submit" class="btn btn-primary" value="Sign In" />
+                </div>
+                <div class="mt-3 d-grid">
+                    <a asp-action="Register" asp-controller="Accounts" class=" link link-info">Don't have an account? Register here</a>
+                </div>
+
+
+            </div>
+        </div>
+    </form>
+</body>
+
+
+
+<style>
+    .image {
+        background-image: url("https://th.bing.com/th/id/R.1fd8cdf9cbcbf0153a54d285eb88d4cf?rik=7SEb69DaUm6uQg&riu=http%3a%2f%2fwww.mytokri.com%2fblog%2fwp-content%2fuploads%2f2016%2f03%2fhomebg.jpg&ehk=KPPbb3jGZlsCdHtbgMw1sqAZoOHKl5OJXIfB%2fd98ZSk%3d&risl=&pid=ImgRaw&r=0");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .row {
+        margin-top: 15%;
+    }
+</style>
