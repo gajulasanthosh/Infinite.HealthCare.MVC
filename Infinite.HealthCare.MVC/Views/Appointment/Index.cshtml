@@ -14,7 +14,9 @@
             <tr>
                 <th>Appointment Id</th>
                 <th>Patient Id</th>
+                <th>Patient Name</th>
                 <th>Doctor Id</th>
+                <th>Doctor Name</th>
                 <th>Appointment Date</th>
                 <th>Appointment Time</th>
                 <th>Problem</th>
@@ -28,7 +30,9 @@
 
                     <td>@x.Id</td>
                     <td>@x.PatientId</td>
+                    <td>@x.PatientName</td>
                     <td>@x.DoctorId</td>
+                    <td>@x.DoctorName</td>
                     <td>@x.AppointmentDate.ToShortDateString()</td>
                     <td>@x.AppointmentTime.ToShortTimeString()</td>
                     <td>@x.Problem</td>

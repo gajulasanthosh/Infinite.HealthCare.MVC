@@ -24,5 +24,9 @@ namespace Infinite.HealthCare.MVC.Models
         [Required(ErrorMessage ="Please explain the problem")]
         [StringLength(150)]
         public string Problem { get; set; }
+
+        public string PatientName { get; set; }
+        public string DoctorName { get; set; }
+
     }
 }

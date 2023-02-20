@@ -1,4 +1,5 @@
 ﻿using Infinite.HealthCare.MVC.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -22,7 +23,7 @@ namespace Infinite.HealthCare.MVC.Controllers
             List<AppointmentVM> appointments = new();
             using (var client = new HttpClient())
             {
-                //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
                 client.BaseAddress = new System.Uri(_Configuration["ApiUrl:api"]);
                 var result = await client.GetAsync("Appointment/GetAllAppointments");
                 if (result.IsSuccessStatusCode)
@@ -47,7 +48,7 @@ namespace Infinite.HealthCare.MVC.Controllers
             {
                 using (var client = new HttpClient())
                 {
-                    //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+                    client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
                     client.BaseAddress = new Uri(_Configuration["ApiUrl:api"]);
                     var result = await client.PostAsJsonAsync("Appointment/CreateAppointment", appointment);
                     if (result.StatusCode == System.Net.HttpStatusCode.Created)
@@ -67,6 +68,7 @@ namespace Infinite.HealthCare.MVC.Controllers
             AppointmentVM appointment = null;
             using (var client = new HttpClient())
             {
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
                 client.BaseAddress = new System.Uri(_Configuration["ApiUrl:api"]);
                 var result = await client.GetAsync($"Appointent/GetAppointmentById/{id}");
                 if (result.IsSuccessStatusCode)
@@ -91,6 +93,7 @@ namespace Infinite.HealthCare.MVC.Controllers
 
             using (var client = new HttpClient())
             {
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
                 client.BaseAddress = new System.Uri(_Configuration["ApiUrl:api"]);
                 var result = await client.DeleteAsync($"Appointment/DeleteAppointment/{appointment.Id}");
                 if (result.IsSuccessStatusCode)
