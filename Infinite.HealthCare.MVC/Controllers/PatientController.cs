@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Infinite.HealthCare.MVC.Controllers
@@ -23,7 +24,7 @@ namespace Infinite.HealthCare.MVC.Controllers
             List<PatientVM> patients = new();
             using (var client = new HttpClient())
             {
-                //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
                 client.BaseAddress = new System.Uri(_Configuration["ApiUrl:api"]);
                 var result = await client.GetAsync("Patient/GetAllPatients");
                 if (result.IsSuccessStatusCode)
@@ -39,7 +40,7 @@ namespace Infinite.HealthCare.MVC.Controllers
             PatientVM patient = null;
             using (var client = new HttpClient())
             {
-                //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
                 client.BaseAddress = new System.Uri(_Configuration["ApiUrl:api"]);
                 var result = await client.GetAsync($"Patient/GetPatientById/{id}");
                 if (result.IsSuccessStatusCode)
@@ -59,13 +60,18 @@ namespace Infinite.HealthCare.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(PatientVM patient)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 using (var client = new HttpClient())
                 {
-                    //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+                    client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
                     client.BaseAddress = new Uri(_Configuration["ApiUrl:api"]);
+                    //patient.UserId;
+                    //var x= User.FindFirstValue(ClaimTypes.Name);
+                    var userId = HttpContext.Session.GetString("UserId");
+                    patient.UserId = int.Parse(userId);
                     var result = await client.PostAsJsonAsync("Patient/CreatePatient", patient);
+
                     if (result.StatusCode == System.Net.HttpStatusCode.Created)
                     {
                         return RedirectToAction("Index", "Patient");
@@ -85,7 +91,7 @@ namespace Infinite.HealthCare.MVC.Controllers
                 PatientVM patient = null;
                 using (var client = new HttpClient())
                 {
-                    //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+                    client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
                     client.BaseAddress = new Uri(_Configuration["ApiUrl:api"]);
                     var result = await client.GetAsync($"Patient/GetPatientById/{id}");
                     if (result.IsSuccessStatusCode)
@@ -111,6 +117,7 @@ namespace Infinite.HealthCare.MVC.Controllers
             {
                 using (var client = new HttpClient())
                 {
+                    client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
                     client.BaseAddress = new Uri(_Configuration["ApiUrl:api"]);
                     var result = await client.PutAsJsonAsync($"Patient/UpdatePatient/{patient.Id}", patient);
                     if (result.IsSuccessStatusCode)
@@ -133,6 +140,7 @@ namespace Infinite.HealthCare.MVC.Controllers
             PatientVM patient = null;
             using (var client = new HttpClient())
             {
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
                 client.BaseAddress = new System.Uri(_Configuration["ApiUrl:api"]);
                 var result = await client.GetAsync($"Patient/GetPatientById/{id}");
                 if (result.IsSuccessStatusCode)
@@ -157,6 +165,7 @@ namespace Infinite.HealthCare.MVC.Controllers
 
             using (var client = new HttpClient())
             {
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
                 client.BaseAddress = new System.Uri(_Configuration["ApiUrl:api"]);
                 var result = await client.DeleteAsync($"Patient/DeletePatient/{patient.Id}");
                 if (result.IsSuccessStatusCode)

@@ -181,13 +181,20 @@ namespace Infinite.HealthCare.MVC.Controllers
                         string token = await result.Content.ReadAsAsync<string>();
                         HttpContext.Session.SetString("token", token);
 
+
                         //var check = User.FindFirstValue(ClaimTypes.Name);
 
                         string role = await ExtractRole();
+
+                        HttpContext.Session.SetString("role", role);
+
+                        string UserId = await ExtractUserId();
+                        HttpContext.Session.SetString("UserId", UserId);
+
                         if (role == "Patient")
                         {
 
-                            return RedirectToAction("Index", "Home");
+                            return RedirectToAction("Index", "Doctor");
                         }
                         else if (role == "Admin")
                         {
@@ -227,6 +234,25 @@ namespace Infinite.HealthCare.MVC.Controllers
                     var role = await roleResult.Content.ReadAsAsync<string>();
                     // ViewBag.Role = role; 
                     return role;
+                }
+                return null;
+            }
+        }
+
+        [NonAction]
+        public async Task<string> ExtractUserId()
+        {
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+                client.BaseAddress = new System.Uri(_configuration["ApiUrl:api"]);
+                var userResult = await client.GetAsync("Accounts/GetId");
+                if (userResult.IsSuccessStatusCode)
+                {
+                    var userId = await userResult.Content.ReadAsAsync<string>();
+                    return userId;
                 }
                 return null;
             }

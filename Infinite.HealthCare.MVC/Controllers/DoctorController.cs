@@ -63,13 +63,15 @@ namespace Infinite.HealthCare.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(DoctorVM doctor)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 using (var client = new HttpClient())
                 {
                     client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
                     client.BaseAddress = new Uri(_Configuration["ApiUrl:api"]);
                     var result = await client.PostAsJsonAsync("Doctor/CreateDoctor", doctor);
+                    var userId = HttpContext.Session.GetString("UserId");
+                    doctor.UserId = int.Parse(userId);
                     if (result.StatusCode == System.Net.HttpStatusCode.Created)
                     {
                         return RedirectToAction("Index", "Doctor");
@@ -137,6 +139,7 @@ namespace Infinite.HealthCare.MVC.Controllers
             DoctorVM doctor = null;
             using (var client = new HttpClient())
             {
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
                 client.BaseAddress = new System.Uri(_Configuration["ApiUrl:api"]);
                 var result = await client.GetAsync($"Doctor/GetDoctorById/{id}");
                 if (result.IsSuccessStatusCode)
@@ -161,6 +164,7 @@ namespace Infinite.HealthCare.MVC.Controllers
 
             using (var client = new HttpClient())
             {
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
                 client.BaseAddress = new System.Uri(_Configuration["ApiUrl:api"]);
                 var result = await client.DeleteAsync($"Doctor/DeleteDoctor/{doctor.Id}");
                 if (result.IsSuccessStatusCode)

@@ -31,6 +31,6 @@ namespace Infinite.HealthCare.MVC.Models
         [Phone]
         [StringLength(10, MinimumLength = 10, ErrorMessage = "Please enter valid Mobile Number")]
         public string PhoneNo { get; set; }
-        //public int? UserId { get; set; }
+        public int UserId { get; set; }
     }
 }
