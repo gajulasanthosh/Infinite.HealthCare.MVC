@@ -53,7 +53,7 @@ namespace Infinite.HealthCare.MVC.Controllers
                     var result = await client.PostAsJsonAsync("Appointment/CreateAppointment", appointment);
                     if (result.StatusCode == System.Net.HttpStatusCode.Created)
                     {
-                        return RedirectToAction("Index", "Appointment");
+                        return RedirectToAction("Index", "PatientHome");
                     }
                 }
             }

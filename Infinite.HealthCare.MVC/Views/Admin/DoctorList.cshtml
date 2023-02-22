@@ -3,12 +3,6 @@
     ViewData["Title"] = "Index";
 }
 
-<style>
-    body{
-        background-color:lightblue;
-    }
-</style>
-<body>
 <h1>List of Doctors</h1>
 
 @*<div class="col">
@@ -33,13 +27,12 @@
                     <td>@x.DoctorName</td>
                     <td>@x.Specilization</td>
                     <td>
-                        <a asp-controller="Doctor" asp-action="Details" asp-route-id="@x.Id" class="btn btn-primary">Details</a>
-                        @*<a asp-controller="Doctor" asp-action="Edit" asp-route-id="@x.Id" class="btn btn-primary">Edit</a>
-                        <a asp-controller="Doctor" asp-action="Delete" asp-route-id="@x.Id" class="btn btn-danger">Delete</a>*@
+                        <a asp-controller="Admin" asp-action="DoctorDetails" asp-route-id="@x.Id" class="btn btn-primary">Details</a>
+                        <a asp-controller="Doctor" asp-action="Edit" asp-route-id="@x.Id" class="btn btn-primary">Edit</a>
+                        <a asp-controller="Doctor" asp-action="Delete" asp-route-id="@x.Id" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
-</body>

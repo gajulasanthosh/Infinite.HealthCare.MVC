@@ -1,0 +1,25 @@
+﻿@model PatientVM
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+
+<div class="row offset-4">
+    <div class="col-md-7">
+        <h1 class="p-5">Details</h1>
+        <ul class="list-group">
+            <li class="list-group-item"><b>Patient Name: </b>@Model.FullName</li>
+            <li class="list-group-item"><b>Gender: </b>@Model.Gender</li>
+            <li class="list-group-item"><b>Age: </b>@Model.Age</li>
+            <li class="list-group-item"><b>Email: </b>@Model.EmailId</li>
+            <li class="list-group-item"><b>Address: </b>@Model.Address</li>
+            <li class="list-group-item"><b>City: </b>@Model.City</li>
+            <li class="list-group-item"><b>State: </b>@Model.State</li>
+            <li class="list-group-item"><b>Pincode: </b>@Model.PinCode</li>
+            <li class="list-group-item"><b>Mobile No: </b>@Model.MobileNo</li>
+        </ul>
+        <a asp-controller="Admin" asp-action="PatientList" class="btn btn-info"> Back To Index</a>
+    </div>
+</div>
+

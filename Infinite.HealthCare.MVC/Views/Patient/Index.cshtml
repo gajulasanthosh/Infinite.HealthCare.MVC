@@ -5,9 +5,9 @@
 
 <h1>List of Patients</h1>
 
-<div class="col">
+@*<div class="col">
     <a asp-controller="Patient" asp-action="Create" class="btn btn-primary">Patient Registeration</a>
-</div>
+</div>*@
 <div class="col-md-9">
      <table class="tatble table-hover table-bordered">
          <thead>
@@ -26,8 +26,8 @@
                  <td>@x.FullName</td>
                  <td>
                      <a asp-controller="Patient" asp-action="Details" asp-route-id="@x.Id" class="btn btn-primary">Details</a>
-                     <a asp-controller="Patient" asp-action="Edit" asp-route-id="@x.Id" class="btn btn-primary">Edit</a>
-                     <a asp-controller="Patient" asp-action="Delete" asp-route-id="@x.Id" class="btn btn-danger">Delete</a>
+                     @*<a asp-controller="Patient" asp-action="Edit" asp-route-id="@x.Id" class="btn btn-primary">Edit</a>
+                     <a asp-controller="Patient" asp-action="Delete" asp-route-id="@x.Id" class="btn btn-danger">Delete</a>*@
                  </td></tr>
                  }
         </tbody>

@@ -194,7 +194,7 @@ namespace Infinite.HealthCare.MVC.Controllers
                         if (role == "Patient")
                         {
 
-                            return RedirectToAction("Index", "Doctor");
+                            return RedirectToAction("Index", "PatientHome");
                         }
                         else if (role == "Admin")
                         {
@@ -202,7 +202,7 @@ namespace Infinite.HealthCare.MVC.Controllers
                         }
                         else if (role == "Doctor")
                         {
-                            return RedirectToAction("Index", "Doctor");
+                            return RedirectToAction("Index", "DoctorHome");
                         }
                         else
                         {

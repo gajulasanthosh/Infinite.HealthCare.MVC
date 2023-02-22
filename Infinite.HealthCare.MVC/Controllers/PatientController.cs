@@ -74,7 +74,7 @@ namespace Infinite.HealthCare.MVC.Controllers
 
                     if (result.StatusCode == System.Net.HttpStatusCode.Created)
                     {
-                        return RedirectToAction("Index", "Patient");
+                        return RedirectToAction("Index", "PatientHome");
                     }
                 }
             }
@@ -122,7 +122,7 @@ namespace Infinite.HealthCare.MVC.Controllers
                     var result = await client.PutAsJsonAsync($"Patient/UpdatePatient/{patient.Id}", patient);
                     if (result.IsSuccessStatusCode)
                     {
-                        return RedirectToAction("Index");
+                        return RedirectToAction("PatientList","Admin");
                     }
                     else
                     {
@@ -170,7 +170,7 @@ namespace Infinite.HealthCare.MVC.Controllers
                 var result = await client.DeleteAsync($"Patient/DeletePatient/{patient.Id}");
                 if (result.IsSuccessStatusCode)
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("PatientList", "Admin");
 
                 }
                 else

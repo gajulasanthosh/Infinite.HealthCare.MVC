@@ -9,10 +9,11 @@ namespace Infinite.HealthCare.MVC.Models
     public class AppointmentVM
     {
         public int Id { get; set; }
-        
+        [Required(ErrorMessage ="Patient Id cannot be empty")]
+        [Display(Name ="Patient Id")]
         public int PatientId { get; set; }
-        [Required(ErrorMessage = "Please select a doctor")]
-        [Display(Name ="Doctor")]
+        [Required(ErrorMessage = "Please enter a doctor Id")]
+        [Display(Name ="Doctor Id")]
 
         public int DoctorId { get; set; }
         [Required(ErrorMessage ="Please provide Appointment Date")]

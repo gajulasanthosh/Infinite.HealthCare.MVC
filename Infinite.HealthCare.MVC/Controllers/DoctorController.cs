@@ -69,12 +69,13 @@ namespace Infinite.HealthCare.MVC.Controllers
                 {
                     client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
                     client.BaseAddress = new Uri(_Configuration["ApiUrl:api"]);
-                    var result = await client.PostAsJsonAsync("Doctor/CreateDoctor", doctor);
                     var userId = HttpContext.Session.GetString("UserId");
                     doctor.UserId = int.Parse(userId);
+                    var result = await client.PostAsJsonAsync("Doctor/CreateDoctor", doctor);
+                    
                     if (result.StatusCode == System.Net.HttpStatusCode.Created)
                     {
-                        return RedirectToAction("Index", "Doctor");
+                        return RedirectToAction("Index", "DoctorHome");
                     }
                 }
             }
@@ -108,6 +109,41 @@ namespace Infinite.HealthCare.MVC.Controllers
             return View();
         }
 
+        //[HttpGet]
+        //public async Task<IActionResult> Edit2(int id)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        DoctorVM doctor = null;
+        //        using (var client = new HttpClient())
+        //        {
+        //            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+        //            client.BaseAddress = new Uri(_Configuration["ApiUrl:api"]);
+        //            //var userId = HttpContext.Session.GetString("UserId");
+        //            //var ID = int.Parse(userId);
+        //            var doctorID = await client.GetAsync("Accounts/GetIdforEdit");
+        //            if (doctorID.IsSuccessStatusCode)
+        //            {
+        //                var id2 = await doctorID.Content.ReadAsAsync<>();
+        //                id2 = id;
+        //            }
+                    
+        //            var result = await client.GetAsync($"Doctor/GetDoctorById/{id}");
+        //            if (result.IsSuccessStatusCode)
+        //            {
+        //                doctor = await result.Content.ReadAsAsync<DoctorVM>();
+        //                return View(doctor);
+        //            }
+        //            else
+        //            {
+        //                ModelState.AddModelError("", "Doctor doesn't exist");
+        //            }
+
+        //        }
+        //    }
+        //    return View();
+        //}
+
         [HttpPost]
         [Route("Doctor/Edit/{Id}")]
         public async Task<IActionResult> Edit(DoctorVM doctor)
@@ -121,7 +157,7 @@ namespace Infinite.HealthCare.MVC.Controllers
                     var result = await client.PutAsJsonAsync($"Doctor/UpdateDoctor/{doctor.Id}", doctor);
                     if (result.IsSuccessStatusCode)
                     {
-                        return RedirectToAction("Index");
+                        return RedirectToAction("DoctorList","Admin");
                     }
                     else
                     {
@@ -169,7 +205,7 @@ namespace Infinite.HealthCare.MVC.Controllers
                 var result = await client.DeleteAsync($"Doctor/DeleteDoctor/{doctor.Id}");
                 if (result.IsSuccessStatusCode)
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("DoctorList","Admin");
 
                 }
                 else
