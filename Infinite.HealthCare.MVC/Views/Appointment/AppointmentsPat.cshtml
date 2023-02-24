@@ -1,0 +1,56 @@
+﻿@model IEnumerable<AppointmentVM>
+@using Microsoft.AspNetCore.Http;
+@{
+    ViewData["Title"] = "Index";
+    var user = Context.Session.GetString("role");
+}
+
+<style>
+    body {
+        background-color: lightblue;
+    }
+</style>
+<body>
+    <h1 style="margin-left:150px">List of Appointments</h1>
+
+
+    <div class="col-md-12">
+        <table class="table table-hover table-bordered text-center">
+            <thead>
+                <tr>
+
+                    <th>Patient Id</th>
+                    <th>Patient Name</th>
+                    <th>Doctor Id</th>
+                    <th>Doctor Name</th>
+                    <th>Appointment Date</th>
+                    <th>Appointment Time</th>
+                    <th>Problem</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var x in Model)
+                {
+                    <tr>
+
+
+                        <td>@x.PatientId</td>
+                        <td>@x.PatientName</td>
+                        <td>@x.DoctorId</td>
+                        <td>@x.DoctorName</td>
+                        <td>@x.AppointmentDate.ToShortDateString()</td>
+                        <td>@x.AppointmentTime.ToShortTimeString()</td>
+                        <td>@x.Problem</td>
+
+                        @*<td>
+                                <a asp-controller="Appointment" asp-action="Delete" asp-route-id="@x.Id" class="btn btn-danger">Delete</a>
+                            </td>*@
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</body>

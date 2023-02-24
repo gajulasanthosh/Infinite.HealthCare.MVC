@@ -3,11 +3,16 @@
     ViewData["Title"] = "Edit";
 }
 
+<style>
+    body{
+        background-color:lightblue;
+    }
+</style>
 <body>
     <div class="container offset-4 pt-5">
-        <h1>Edit Customer</h1>
+        <h1>Edit Doctor</h1>
 
-        <form asp-controller="Doctor" asp-action="Edit" method="post">
+        <form asp-controller="Doctor" asp-action="Edit" asp- method="post">
             <div class="row">
                 <div class="col-md-4">
                     <div asp-validation-summary="All" class="text-danger"></div>

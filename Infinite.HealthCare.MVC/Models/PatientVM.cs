@@ -34,7 +34,7 @@ namespace Infinite.HealthCare.MVC.Models
 
         [Required(ErrorMessage ="Please enter your Mobile Number")]
         [Phone]
-        [RegularExpression("^([6-9][0-9]{10})$", ErrorMessage = "Invalid Mobile Number.")]
+        [RegularExpression("^([0-9]{10})$", ErrorMessage = "Invalid Mobile Number.")]
         [Display(Name ="Mobile Number")]
         [StringLength(10,MinimumLength =10,ErrorMessage ="Please enter valid Mobile Number")]
         public string MobileNo { get; set; }

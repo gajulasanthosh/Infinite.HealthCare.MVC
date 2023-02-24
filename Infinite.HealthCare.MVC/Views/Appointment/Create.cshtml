@@ -20,11 +20,12 @@
                     <span asp-validation-for="DoctorId"></span>
                 </div>
 
-                <div class="mb-2">
+                @*<div class="mb-2">
                     <label asp-for="PatientId" class="form-label"></label>
                     <input type="text" asp-for="PatientId" class="form-control" placeholder="Please enter your Id. Please refer email for your Id" />
                     <span asp-validation-for="PatientId"></span>
-                </div>
+                </div>*@
+                <input type="hidden" asp-for="PatientId" />
 
                 <div class="mb-2">
                     <label asp-for="AppointmentDate" class="form-label"></label>

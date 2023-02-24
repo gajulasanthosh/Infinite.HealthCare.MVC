@@ -75,7 +75,7 @@ namespace Infinite.HealthCare.MVC.Controllers
                     
                     if (result.StatusCode == System.Net.HttpStatusCode.Created)
                     {
-                        return RedirectToAction("Index", "DoctorHome");
+                        return RedirectToAction("Index", "Admin");
                     }
                 }
             }
@@ -93,6 +93,8 @@ namespace Infinite.HealthCare.MVC.Controllers
                 {
                     client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
                     client.BaseAddress = new Uri(_Configuration["ApiUrl:api"]);
+                    //int userId = await ExtractId();
+                    //int.Parse(userId) = id;
                     var result = await client.GetAsync($"Doctor/GetDoctorById/{id}");
                     if (result.IsSuccessStatusCode)
                     {
@@ -109,40 +111,24 @@ namespace Infinite.HealthCare.MVC.Controllers
             return View();
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> Edit2(int id)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        DoctorVM doctor = null;
-        //        using (var client = new HttpClient())
-        //        {
-        //            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
-        //            client.BaseAddress = new Uri(_Configuration["ApiUrl:api"]);
-        //            //var userId = HttpContext.Session.GetString("UserId");
-        //            //var ID = int.Parse(userId);
-        //            var doctorID = await client.GetAsync("Accounts/GetIdforEdit");
-        //            if (doctorID.IsSuccessStatusCode)
-        //            {
-        //                var id2 = await doctorID.Content.ReadAsAsync<>();
-        //                id2 = id;
-        //            }
-                    
-        //            var result = await client.GetAsync($"Doctor/GetDoctorById/{id}");
-        //            if (result.IsSuccessStatusCode)
-        //            {
-        //                doctor = await result.Content.ReadAsAsync<DoctorVM>();
-        //                return View(doctor);
-        //            }
-        //            else
-        //            {
-        //                ModelState.AddModelError("", "Doctor doesn't exist");
-        //            }
-
-        //        }
-        //    }
-        //    return View();
-        //}
+        [NonAction]
+        public async Task<int> ExtractId()
+        {
+            using(var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+                client.BaseAddress = new System.Uri(_Configuration["ApiUrl:api"]);
+                var Result = await client.GetAsync("Accounts/GetIdforEdit");
+                if (Result.IsSuccessStatusCode)
+                {
+                    var role = await Result.Content.ReadAsAsync<int>();
+                    return role;
+                }
+                return -1;
+            }
+        }
 
         [HttpPost]
         [Route("Doctor/Edit/{Id}")]

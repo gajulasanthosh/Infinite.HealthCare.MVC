@@ -4,9 +4,9 @@
 }
 
 <body>
-    <form asp-controller="Accounts" asp-action="Login" method="post">
+    <form asp-controller="Accounts" asp-action="AdminLogin" method="post">
         <div class="form">
-            <h2>Login</h2>
+            <h2>Admin Login</h2>
             <input type="text" asp-for="UserName" placeholder="Enter Username">
             <input type="password" asp-for="Password" placeholder="Enter Password">
             <input class="btnn" type="submit" value="Sign In" />
@@ -17,11 +17,10 @@
 <style>
 
     body {
-        background-image: url("https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8ZG9jdG9yfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60");
+        background-image: url("https://images.unsplash.com/photo-1579389083078-4e7018379f7e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80");
         background-repeat: no-repeat;
         background-size: cover;
     }
-
     .form {
         width: 290px;
         height: 280px;

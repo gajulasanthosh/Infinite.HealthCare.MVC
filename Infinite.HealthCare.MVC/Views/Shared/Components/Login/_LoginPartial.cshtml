@@ -8,6 +8,8 @@
 {
 
 
+
+
     @if (role == "Admin")
     {
         <ul class="navbar-nav my-2 my-sm-0">
@@ -30,10 +32,11 @@
     {
         <ul class="navbar-nav my-2 my-sm-0">
 
-            <li class="nav-item"><a asp-action="Index" asp-controller="Appointment" class="nav-link">Appointments</a></li>
+            <li class="nav-item"><a asp-action="Appointments" asp-controller="Appointment" class="nav-link">Appointments</a></li>
 
 
-            <li class="nav-item"><a asp-action="Create" asp-controller="Doctor" class="nav-link">Add Profile</a></li>
+            @*<li class="nav-item"><a asp-action="Create" asp-controller="Doctor" class="nav-link">Add Profile</a></li>*@
+            @*<li class="nav-item"><a asp-action="Edit" asp-controller="Doctor" class="nav-link">Update Profile</a></li>*@
 
             <li class="nav-item"><a asp-controller="DoctorHome" asp-action="Index" class="nav-link">welcome,@ViewBag.Name</a></li>
             <li class="nav-item">
@@ -45,13 +48,13 @@
     }
     else if (role == "Patient")
     {
-        <ul class="navbar-nav my-2 my-sm-0">
+        <ul class="navbar-nav flex-grow-1">
 
             <li class="nav-item"><a asp-action="Create"  asp-controller="Appointment" class="nav-link">Book Appointment</a></li>
 
 
             <li class="nav-item"><a asp-action="Create" asp-controller="Patient" class="nav-link">Add Profile</a></li>
-            <li class="nav-item"><a asp-action="Index" asp-controller="Doctor" class="nav-link">List of Doctors</a></li>
+            
 
             <li class="nav-item"><a asp-controller="PatientHome" asp-action="Index" class="nav-link">welcome,@ViewBag.Name</a></li>
             <li class="nav-item">
@@ -66,14 +69,17 @@
 }
 else
 {
-    <ul class="navbar-nav my-2 my-sm-0 ">
-        <li class="nav-item d-inline-flex right">
-            <a class="nav-link" asp-area="" asp-controller="Accounts" asp-action="Register">Register</a>
-        </li>
-        <li class="nav-item d-flex ">
-            <a class="nav-link" asp-area="" asp-controller="Accounts" asp-action="Login">Login</a>
-        </li>
-    </ul>
+<ul class="navbar-nav my-2 my-sm-0 ">
+    <li class="nav-item d-inline-flex right">
+        <a class="nav-link" asp-area="" asp-controller="Accounts" asp-action="Register">Register</a>
+    </li>
+    <li class="nav-item d-flex ">
+        <a class="nav-link" asp-area="" asp-controller="Accounts" asp-action="Login">Login</a>
+    </li>
+    <li class="nav-item d-flex ">
+        <a class="nav-link" asp-area="" asp-controller="Accounts" asp-action="AdminLogin">Admin Login</a>
+    </li>
+</ul>
 }
 
 <style>

@@ -2,8 +2,14 @@
 @{
     ViewData["Title"] = "Create";
 }
+<style>
+    body{
+        background-color: lightblue;
+    }
+</style>
 
-<div class="col offset-4 pt-5 ">
+<body>
+    <div class="col offset-4 pt-5 ">
     <h1>Add details of Patient</h1>
     <form asp-controller="Patient" asp-action="Create" method="post">
         <div class="row">
@@ -72,5 +78,5 @@
         </div>
     </form>
 </div>
-
+</body>
 

@@ -3,65 +3,71 @@
     ViewData["Title"] = "Create";
 }
 
-<div class="col offset-4 pt-5 ">
-    <h1>Add details of Doctor</h1>
-    <form asp-controller="Doctor" asp-action="Create" method="post">
-        <div class="row">
-            <div class="col-md-5">
-                <div class="mb-1">
-                    <label asp-for="DoctorName" class="form-label"></label>
-                    <input type="text" asp-for="DoctorName" class="form-control" />
-                    <span asp-validation-for="DoctorName"></span>
-                </div>
+<style>
+    body{
+        background-color:lightblue;
+    }
+</style>
+<body>
+    <div class="col offset-4 pt-5 ">
+        <h1>Add details of Doctor</h1>
+        <form asp-controller="Doctor" asp-action="Create" method="post">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="mb-1">
+                        <label asp-for="DoctorName" class="form-label"></label>
+                        <input type="text" asp-for="DoctorName" class="form-control" />
+                        <span asp-validation-for="DoctorName"></span>
+                    </div>
 
-                <div class="mb-2">
-                    <label asp-for="EmailId" class="form-label"></label>
-                    <input type="text" asp-for="EmailId" class="form-control" />
-                    <span asp-validation-for="EmailId"></span>
-                </div>
+                    <div class="mb-2">
+                        <label asp-for="EmailId" class="form-label"></label>
+                        <input type="text" asp-for="EmailId" class="form-control" />
+                        <span asp-validation-for="EmailId"></span>
+                    </div>
 
-                <div class="mb-2">
-                    <label asp-for="Qualification" class="form-label"></label>
-                    <input type="text" asp-for="Qualification" class="form-control" />
-                    <span asp-validation-for="Qualification"></span>
-                </div>
+                    <div class="mb-2">
+                        <label asp-for="Qualification" class="form-label"></label>
+                        <input type="text" asp-for="Qualification" class="form-control" />
+                        <span asp-validation-for="Qualification"></span>
+                    </div>
 
-                <div class="mb-2">
-                    <label asp-for="Specilization" class="form-label"></label>
-                    <input type="text" asp-for="Specilization" class="form-control" />
-                    <span asp-validation-for="Specilization"></span>
-                </div>
+                    <div class="mb-2">
+                        <label asp-for="Specilization" class="form-label"></label>
+                        <input type="text" asp-for="Specilization" class="form-control" />
+                        <span asp-validation-for="Specilization"></span>
+                    </div>
 
-                <div class="mb-2">
-                    <label asp-for="Address" class="form-label"></label>
-                    <input type="text" asp-for="Address" class="form-control" />
-                    <span asp-validation-for="Address"></span>
-                </div>
-                <div class="mb-2">
-                    <label asp-for="City" class="form-label"></label>
-                    <input type="text" asp-for="City" class="form-control" />
-                    <span asp-validation-for="City"></span>
-                </div>
+                    <div class="mb-2">
+                        <label asp-for="Address" class="form-label"></label>
+                        <input type="text" asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address"></span>
+                    </div>
+                    <div class="mb-2">
+                        <label asp-for="City" class="form-label"></label>
+                        <input type="text" asp-for="City" class="form-control" />
+                        <span asp-validation-for="City"></span>
+                    </div>
 
-                <div class="mb-2">
-                    <label asp-for="State" class="form-label"></label>
-                    <input type="text" asp-for="State" class="form-control" />
-                    <span asp-validation-for="State"></span>
-                </div>
+                    <div class="mb-2">
+                        <label asp-for="State" class="form-label"></label>
+                        <input type="text" asp-for="State" class="form-control" />
+                        <span asp-validation-for="State"></span>
+                    </div>
 
-                <div class="mb-2">
-                    <label asp-for="PhoneNo" class="form-label"></label>
-                    <input type="text" asp-for="PhoneNo" class="form-control" />
-                    <span asp-validation-for="PhoneNo"></span>
-                </div>
+                    <div class="mb-2">
+                        <label asp-for="PhoneNo" class="form-label"></label>
+                        <input type="text" asp-for="PhoneNo" class="form-control" />
+                        <span asp-validation-for="PhoneNo"></span>
+                    </div>
 
-                <input type="hidden" asp-for="UserId" />
+                    <input type="hidden" asp-for="UserId" />
 
-                <div class="mt-2 d-grid">
-                    <input type="submit" class="btn btn-primary" value="Add New" />
+                    <div class="mt-2 d-grid">
+                        <input type="submit" class="btn btn-primary" value="Add New" />
+                    </div>
                 </div>
             </div>
-        </div>
-    </form>
-</div>
-
+        </form>
+    </div>
+</body>

@@ -62,7 +62,9 @@
     -ms-user-select: none;
     user-select: none; }
   .owl-carousel.owl-loaded {
-    display: block; }
+    display: block;
+    
+  }
   .owl-carousel.owl-loading {
     opacity: 0;
     display: block; }

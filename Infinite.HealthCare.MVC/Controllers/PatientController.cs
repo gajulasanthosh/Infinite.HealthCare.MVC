@@ -93,6 +93,7 @@ namespace Infinite.HealthCare.MVC.Controllers
                 {
                     client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
                     client.BaseAddress = new Uri(_Configuration["ApiUrl:api"]);
+                    //string userId = await ExtractId();
                     var result = await client.GetAsync($"Patient/GetPatientById/{id}");
                     if (result.IsSuccessStatusCode)
                     {
@@ -107,6 +108,25 @@ namespace Infinite.HealthCare.MVC.Controllers
                 }
             }
             return View();
+        }
+
+        [NonAction]
+        public async Task<string> ExtractId()
+        {
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+                client.BaseAddress = new System.Uri(_Configuration["ApiUrl:api"]);
+                var Result = await client.GetAsync("Accounts/GetIdforEdit");
+                if (Result.IsSuccessStatusCode)
+                {
+                    var role = await Result.Content.ReadAsAsync<string>();
+                    return role;
+                }
+                return null;
+            }
         }
 
         [HttpPost]

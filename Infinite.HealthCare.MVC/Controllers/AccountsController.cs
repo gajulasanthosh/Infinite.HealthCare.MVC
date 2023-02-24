@@ -58,15 +58,6 @@ namespace Infinite.HealthCare.MVC.Controllers
                     if (result.IsSuccessStatusCode)
                     {
 
-                        //if (model.SelectedValue=="Customer")
-                        //{
-                        //    return RedirectToAction("Create", "Customers");
-                        //}
-                        //else if (model.SelectedValue=="Employee")
-                        //{
-                        //    return RedirectToAction("Create", "Employees");
-                        //}
-
 
                         return RedirectToAction("Login");
                     }
@@ -104,7 +95,7 @@ namespace Infinite.HealthCare.MVC.Controllers
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> RegisterDocotr([FromForm] RolesRegisterVM model)
+        public async Task<IActionResult> RegisterDoctor([FromForm] RolesRegisterVM model)
         {
             if (ModelState.IsValid)
             {
@@ -135,7 +126,7 @@ namespace Infinite.HealthCare.MVC.Controllers
                         //}
 
 
-                        return RedirectToAction("Login");
+                        return RedirectToAction("Create", "Doctor");
                     }
                 }
             }
@@ -182,7 +173,62 @@ namespace Infinite.HealthCare.MVC.Controllers
                         HttpContext.Session.SetString("token", token);
 
 
-                        //var check = User.FindFirstValue(ClaimTypes.Name);
+                        string role = await ExtractRole();
+
+                        HttpContext.Session.SetString("role", role);
+
+                        string UserId = await ExtractUserId();
+                        HttpContext.Session.SetString("UserId", UserId);
+
+                        if (role == "Patient")
+                        {
+
+                            return RedirectToAction("Index", "PatientHome");
+                        }
+                        else if (role == "Admin")
+                        {
+                            return RedirectToAction("Index", "Admin");
+                        }
+                        else if (role == "Doctor")
+                        {
+                            return RedirectToAction("Index", "DoctorHome");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+
+                    }
+                    ModelState.AddModelError("", "Invalid LoginID or Password");
+                }
+            }
+            return View(login);
+        }
+
+
+        [HttpGet]
+        public IActionResult AdminLogin()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> AdminLogin(LoginVM login)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                    client.BaseAddress = new System.Uri(_configuration["ApiUrl:api"]);
+
+                    var result = await client.PostAsJsonAsync("Accounts/Login", login);
+                    if (result.IsSuccessStatusCode)
+                    {
+
+                        string token = await result.Content.ReadAsAsync<string>();
+                        HttpContext.Session.SetString("token", token);
+
 
                         string role = await ExtractRole();
 
